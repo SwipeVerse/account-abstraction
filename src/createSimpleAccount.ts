@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { AASigner, localUserOpSender } from './AASigner'
+import { AASigner, rpcUserOpSender } from './AASigner'
 // import { EntryPoint__factory } from '../typechain'
 // import '../test/aa.init'
 // import { parseEther } from 'ethers/lib/utils'
@@ -16,7 +16,7 @@ const createAccount = async (
   const wallet = new ethers.Wallet(privateKey, provider)
   const ethersSigner = wallet.connect(provider)
 
-  const sendUserOp = localUserOpSender(entryPointAddress, ethersSigner)
+  const sendUserOp = rpcUserOpSender(provider, entryPointAddress)
   const index = parseInt(process.env.AA_INDEX ?? '0')
   const aaSigner = new AASigner(
     ethersSigner,
