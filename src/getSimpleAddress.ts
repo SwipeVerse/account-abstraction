@@ -7,8 +7,9 @@ export async function getSimpleAccountAddress(
   provider: ethers.providers.Provider,
   index: number = 0
 ): Promise<string> {
-  const factory = SimpleAccountFactory__factory.connect(
+  const factory = new ethers.Contract(
     factoryAddress,
+    SimpleAccountFactory__factory.abi,
     provider
   )
   const address = await factory.getAddress(owner, index)
