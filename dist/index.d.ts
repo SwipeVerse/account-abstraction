@@ -1,0 +1,23 @@
+import { ethers, BigNumberish, BytesLike, Signer } from 'ethers';
+
+declare const createAccount: (accountFactoryAddress: string, entryPointAddress: string, privateKey: string) => Promise<string>;
+
+declare function getSimpleAccountAddress(factoryAddress: string, owner: string, provider: ethers.providers.Provider, index?: number): Promise<string>;
+
+type PromiseOrValue<T> = T | Promise<T>;
+
+type PackedUserOperationStruct = {
+    sender: PromiseOrValue<string>;
+    nonce: PromiseOrValue<BigNumberish>;
+    initCode: PromiseOrValue<BytesLike>;
+    callData: PromiseOrValue<BytesLike>;
+    accountGasLimits: PromiseOrValue<BytesLike>;
+    preVerificationGas: PromiseOrValue<BigNumberish>;
+    gasFees: PromiseOrValue<BytesLike>;
+    paymasterAndData: PromiseOrValue<BytesLike>;
+    signature: PromiseOrValue<BytesLike>;
+};
+
+declare const localUserOpSender: (entryPointAddress: string, signer: Signer) => (op: PackedUserOperationStruct) => Promise<string>;
+
+export { createAccount, getSimpleAccountAddress, localUserOpSender };
