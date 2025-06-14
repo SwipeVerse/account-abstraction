@@ -1,8 +1,8 @@
-import { ethers, BigNumberish, BytesLike, Signer } from 'ethers';
+import { providers, BigNumberish, BytesLike, Signer } from 'ethers';
 
 declare const createAccount: (accountFactoryAddress: string, entryPointAddress: string, privateKey: string) => Promise<string>;
 
-declare function getSimpleAccountAddress(factoryAddress: string, owner: string, provider: ethers.providers.Provider, index?: number): Promise<string>;
+declare function getSimpleAccountAddress(privateKey: string, provider: providers.JsonRpcProvider): Promise<string>;
 
 type PromiseOrValue<T> = T | Promise<T>;
 
