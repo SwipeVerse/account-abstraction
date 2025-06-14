@@ -1,17 +1,12 @@
-import { ethers } from 'ethers'
-import { SimpleAccountFactory__factory } from '../typechain'
+import { ethers, providers } from 'ethers'
 
 export async function getSimpleAccountAddress(
-  factoryAddress: string,
-  owner: string,
-  provider: ethers.providers.Provider,
-  index: number = 0
+  privateKey: string,
+  provider: providers.JsonRpcProvider
 ): Promise<string> {
-  const factory = new ethers.Contract(
-    factoryAddress,
-    SimpleAccountFactory__factory.abi,
-    provider
-  )
-  const address = await factory.getAddress(owner, index)
-  return address
+  const wallet = new ethers.Wallet(privateKey, provider)
+
+  const owner = await wallet.getAddress()
+
+  return owner
 }
