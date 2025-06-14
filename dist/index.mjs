@@ -36576,15 +36576,24 @@ var createAccount = async (accountFactoryAddress, entryPointAddress, privateKey)
     index
   );
   const smartAccountAddress = await aaSigner.getAddress();
-  console.log("Predicted Smart Account Address:", smartAccountAddress);
   return smartAccountAddress;
 };
 
 // src/getSimpleAddress.ts
-async function getSimpleAccountAddress(privateKey, provider) {
+async function getSimpleAccountAddress(privateKey, provider, entryPointAddress, accountFactoryAddress) {
   const wallet = new ethers_exports.Wallet(privateKey, provider);
-  const owner = await wallet.getAddress();
-  return owner;
+  const ethersSigner = wallet.connect(provider);
+  const sendUserOp = rpcUserOpSender(provider, entryPointAddress);
+  const index = parseInt(process.env.AA_INDEX ?? "0");
+  const aaSigner = new AASigner(
+    ethersSigner,
+    entryPointAddress,
+    sendUserOp,
+    accountFactoryAddress,
+    index
+  );
+  const smartAccountAddress = await aaSigner.getAddress();
+  return smartAccountAddress;
 }
 
 // src/sendUserOp.ts
