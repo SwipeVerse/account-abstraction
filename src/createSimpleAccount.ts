@@ -27,7 +27,6 @@ const createAccount = async (
   )
 
   const smartAccountAddress = await aaSigner.getAddress()
-  console.log('Predicted Smart Account Address:', smartAccountAddress)
 
   // const balance = await provider.getBalance(smartAccountAddress)
   // if (balance.lt(parseEther('0.01'))) {
