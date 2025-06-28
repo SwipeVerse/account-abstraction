@@ -5,7 +5,6 @@ cache
 artifacts
 /.idea/
 /typechain/
-/dist/
 /yarn-error.log
 /deployments/dev/
 /deployments/localhost/
@@ -18,3 +17,5 @@ artifacts
 .DS_Store
 /contracts/dist/
 /contracts/types/
+
+.vscode
